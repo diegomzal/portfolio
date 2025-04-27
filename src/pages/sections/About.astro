@@ -1,34 +1,26 @@
 ---
+import Window from "../../components/Window.astro";
+
 
 ---
 
 <section class="relative flex w-full">
-    <div class="z-10 absolute left-1/2 transform -translate-x-1/2 flex flex-row max-w-4xl w-full h-5 mx-auto mt-24 rounded-t-lg bg-gray-300">
-        <div class="hidden md:flex flex-row items-start gap-1 pl-2 pt-1">
-            <span class="h-3 w-3 rounded-full bg-[#f26758] border-0 border-gray-500 top-0 right-0" />
-            <span class="h-3 w-3 rounded-full bg-[#f7ba33] border-0 border-gray-500 top-0 right-0" />
-            <span class="h-3 w-3 rounded-full bg-[#45c945] border-0 border-gray-500 top-0 right-0" />
-        </div>
-        <div class="absolute inset-0 flex justify-center text-sm text-[#0d1121]">
-            <p>About me</p>
+    <Window title="About me">
+        <div class="flex p-6 gap-30">
+            <div class="flex-1 text-center md:text-left mt-6">
+                <h2 class="text-2xl font-bold text-blue-950 mb-4">Hi! Im Diego.</h2>
+                <h3 class="text-2xl text-gray-200"> I'm a Full-Stack Software Engineer</h3>
+                <h3 class="text-2xl text-gray-200 mb-4"> with 5+ years of experience. </h3>
+                <p class="text-gray-200 leading-relaxed">
+                    I love technology since I have memory. I enjoy building stuff for others and for myself.
+                </p>
+            </div>
+            <div class="flex justify-center">
+                <div 
+                    class="w-60 h-60 mt-4 rounded-full object-cover border-4 border-gray-300 bg-[url('/images/profile.webp')] bg-cover bg-center" 
+                />
+            </div>
         </div>
         
-    </div>
-    <div class="flex flex-row max-w-4xl mx-auto p-6 mt-24 mb-24 gap-30 rounded-lg bg-white/20 shadow-lg backdrop-blur-md">
-        <div class="flex-1 text-center md:text-left mt-6">
-            <h2 class="text-2xl font-bold text-blue-950 mb-4">Hi! Im Diego.</h2>
-            <h3 class="text-2xl text-gray-200"> I'm a Full-Stack Software Engineer</h3>
-            <h3 class="text-2xl text-gray-200 mb-4"> with 5+ years of experience. </h3>
-            <p class="text-gray-200 leading-relaxed">
-                I love technology since I have memory. I enjoy building stuff for others and for myself.
-            </p>
-        </div>
-        <div class="flex justify-center">
-            <div 
-                class="w-60 h-60 mt-4 rounded-full object-cover border-4 border-gray-300 bg-[url('/images/profile.webp')] bg-cover bg-center" 
-            />
-        </div>
-    </div>
-    
-    
+    </Window>
 </section>
