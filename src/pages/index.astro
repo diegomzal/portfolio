@@ -1,13 +1,27 @@
 ---
 import { Image } from 'astro:assets';
+import '@fontsource/jetbrains-mono/400.css';
+import '@fontsource/jetbrains-mono/400-italic.css';
+import '@fontsource/jetbrains-mono/500.css';
+import '@fontsource/jetbrains-mono/600.css';
 import '../styles/global.css';
 import compare from '../assets/compare.png';
 import europa2026 from '../assets/europa2026.png';
 import unitrack from '../assets/unitrack.png';
 
-const title = 'Diego Muñoz Zaldivar';
+const title = 'Diego Muñoz Zaldivar - Software Engineer';
 const description =
   'Diego Muñoz Zaldivar — software engineer from Lima building web applications in React and .NET.';
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Diego Muñoz Zaldivar',
+  jobTitle: 'Software Engineer',
+  url: Astro.site,
+  email: 'diegomunozzal@gmail.com',
+  sameAs: ['https://www.linkedin.com/in/diegomzal', 'https://github.com/diegomzal'],
+};
 
 const projects = [
   {
@@ -74,14 +88,10 @@ const background = [
     <meta property="og:url" content={Astro.site} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta name="twitter:card" content="summary" />
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap"
-      rel="stylesheet"
-    />
     <title>{title}</title>
     <script is:inline>
       // Set the theme before first paint to avoid a light-mode flash.
@@ -115,7 +125,7 @@ const background = [
             projects.map((project, i) => (
               <li class="project">
                 <div class="p-head">
-                  <span class="arrow">→</span>
+                  <span class="arrow" aria-hidden="true">→</span>
                   <a class="p-name" href={`https://${project.host}`} target="_blank" rel="noreferrer">
                     {project.name}
                   </a>
@@ -129,6 +139,7 @@ const background = [
                   href={`https://${project.host}`}
                   target="_blank"
                   rel="noreferrer"
+                  tabindex="-1"
                 >
                   <Image
                     src={project.img}
@@ -167,11 +178,11 @@ const background = [
         <h2 class="section-label">Elsewhere</h2>
         <div class="contact">
           <a href="mailto:diegomunozzal@gmail.com">diegomunozzal@gmail.com</a>
-          <span class="sep">·</span>
+          <span class="sep" aria-hidden="true">·</span>
           <a href="https://www.linkedin.com/in/diegomzal" target="_blank" rel="noreferrer">linkedin</a>
-          <span class="sep">·</span>
+          <span class="sep" aria-hidden="true">·</span>
           <a href="https://github.com/diegomzal" target="_blank" rel="noreferrer">github</a>
-          <span class="sep">·</span>
+          <span class="sep" aria-hidden="true">·</span>
           <a href="/diego-munoz-cv.pdf" target="_blank" rel="noreferrer">cv</a>
         </div>
       </section>

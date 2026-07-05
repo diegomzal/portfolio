@@ -19,6 +19,8 @@
   --rule: #1f1f1f;
   --placeholder-bg: #161616;
   --placeholder-stripe: #1c1c1c;
+  /* lightened so hover/focus text meets 4.5:1 on the dark background */
+  --accent: #c96b52;
 }
 
 * { box-sizing: border-box; }
@@ -59,7 +61,9 @@ header.masthead .toggle {
   font-family: var(--mono);
   font-size: 12px;
   cursor: pointer;
-  padding: 4px 0;
+  /* generous hit area, pulled back by margins so the layout doesn't move */
+  padding: 12px 0 12px 16px;
+  margin: -12px 0;
   letter-spacing: 0.02em;
 }
 header.masthead .toggle:hover { color: var(--fg); }
@@ -237,6 +241,9 @@ a.link-accent:hover { color: var(--accent); border-bottom-color: var(--accent); 
   .cv li { grid-template-columns: 72px 1fr; column-gap: 14px; }
   .project { grid-template-columns: 1fr; }
   .project .p-url { grid-column: 1 / -1; padding-left: 22px; }
+  /* comfortable tap targets for the small inline links */
+  .contact { gap: 4px 14px; }
+  .contact a, .project .p-url { display: inline-block; padding: 5px 0; }
 }
 
 @media print {
