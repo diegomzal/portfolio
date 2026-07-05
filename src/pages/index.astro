@@ -1,17 +1,187 @@
 ---
+import { Image } from 'astro:assets';
+import '../styles/global.css';
+import compare from '../assets/compare.png';
+import europa2026 from '../assets/europa2026.png';
+import unitrack from '../assets/unitrack.png';
 
+const title = 'Diego Muñoz Zaldivar';
+const description =
+  'Diego Muñoz Zaldivar — software engineer from Lima building web applications in React and .NET.';
+
+const projects = [
+  {
+    name: 'compare',
+    host: 'compare.diegomz.com',
+    img: compare,
+    desc: 'A minimal text comparer. Paste, diff, move on.',
+  },
+  {
+    name: 'europa2026',
+    host: 'europa2026.diegomz.com',
+    img: europa2026,
+    desc: 'A calendar and itinerary for my trip across Europe this year.',
+  },
+  {
+    name: 'unitrack',
+    host: 'unitrack.diegomz.com',
+    img: unitrack,
+    desc: 'Application tracker for students applying to universities abroad.',
+  },
+];
+
+const background = [
+  {
+    year: '2026 —',
+    title: 'M.Sc. High Performance Computing Engineering',
+    role: 'Politecnico di Milano',
+    note: '(starting Sep)',
+  },
+  {
+    year: '2024 —',
+    title: 'Software Engineer',
+    role: 'WTW (Extend Health)',
+  },
+  {
+    year: '2023',
+    title: '1st place, CAII Hackathon',
+    role: 'Contraloría General de la República del Perú',
+  },
+  {
+    year: '2020 – 24',
+    title: 'Senior Consultant',
+    role: 'EY, Integrity Risk Services',
+  },
+  {
+    year: '2015 – 20',
+    title: 'B.Sc. Systems Engineering',
+    role: 'Universidad de Lima',
+    note: '(1st of class)',
+  },
+];
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Portfolio</title>
-	</head>
-	<body>
-		<h1>Portfolio</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfaf7" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0e0e0e" />
+    <link rel="canonical" href={Astro.site} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.site} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+    <script is:inline>
+      // Set the theme before first paint to avoid a light-mode flash.
+      document.documentElement.dataset.theme =
+        localStorage.getItem('theme') ??
+        (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    </script>
+  </head>
+  <body>
+    <div class="page">
+      <header class="masthead">
+        <span class="loc">Lima, Peru → Milan, Italy</span>
+        <button class="toggle" aria-label="Toggle theme"></button>
+      </header>
+
+      <h1 class="hi">Hi, I'm Diego.</h1>
+
+      <p class="bio">
+        I'm a software engineer from Lima with four years building web applications in React and
+        .NET — currently at <a class="link-accent" href="https://www.wtwco.com/" target="_blank" rel="noreferrer">WTW</a>,
+        previously at <a class="link-accent" href="https://www.ey.com/" target="_blank" rel="noreferrer">EY</a>.
+        This September I'm moving to Milan to start a Master's in High Performance Computing
+        Engineering at <a class="link-accent" href="https://www.polimi.it/" target="_blank" rel="noreferrer">Politecnico di Milano</a>.
+        Outside of work I build small tools that I actually use.
+      </p>
+
+      <section>
+        <h2 class="section-label">Projects</h2>
+        <ul class="projects">
+          {
+            projects.map((project, i) => (
+              <li class="project">
+                <div class="p-head">
+                  <span class="arrow">→</span>
+                  <a class="p-name" href={`https://${project.host}`} target="_blank" rel="noreferrer">
+                    {project.name}
+                  </a>
+                </div>
+                <a class="p-url" href={`https://${project.host}`} target="_blank" rel="noreferrer">
+                  {project.host}
+                </a>
+                <p class="p-desc">{project.desc}</p>
+                <div class="screenshot">
+                  <Image
+                    src={project.img}
+                    alt={`${project.name} screenshot`}
+                    widths={[680, 1360]}
+                    sizes="(max-width: 680px) 100vw, 680px"
+                    loading={i === 0 ? 'eager' : 'lazy'}
+                    fetchpriority={i === 0 ? 'high' : undefined}
+                  />
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="section-label">Selected background</h2>
+        <ul class="cv">
+          {
+            background.map((item) => (
+              <li>
+                <span class="year">{item.year}</span>
+                <span class="what">
+                  {item.title} <span class="role">· {item.role}</span>{
+                    item.note && <span class="note"> {item.note}</span>
+                  }
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="section-label">Elsewhere</h2>
+        <div class="contact">
+          <a href="mailto:diegomunozzal@gmail.com">diegomunozzal@gmail.com</a>
+          <span class="sep">·</span>
+          <a href="https://www.linkedin.com/in/diegomzal" target="_blank" rel="noreferrer">linkedin</a>
+          <span class="sep">·</span>
+          <a href="https://github.com/diegomzal" target="_blank" rel="noreferrer">github</a>
+        </div>
+      </section>
+
+      <footer class="foot">
+        <span>English C1 · Spanish native</span>
+        <span>Updated 2026</span>
+      </footer>
+    </div>
+
+    <script>
+      const root = document.documentElement;
+      document.querySelector('.toggle')?.addEventListener('click', () => {
+        const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = next;
+        localStorage.setItem('theme', next);
+      });
+    </script>
+  </body>
 </html>

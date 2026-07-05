@@ -6,7 +6,9 @@ Note: `CLAUDE.md` is a symlink to `AGENTS.md` — edit `AGENTS.md`.
 
 ## Project Overview
 
-A personal portfolio site built with Astro 7 (static output, no framework integrations or adapters configured yet — `astro.config.mjs` is an empty `defineConfig({})`). Requires Node >= 22.12.0.
+Diego Muñoz Zaldivar's personal portfolio — a single-page Astro 7 static site (no framework integrations or adapters — `astro.config.mjs` is an empty `defineConfig({})`). Requires Node >= 22.12.0.
+
+The reference design lives in `.resources/Portfolio.html` (a Claude design export); the site is a clean Astro port of it. Keep the code minimal: content is data arrays in page frontmatter, styling is plain CSS with custom properties, and client JS is limited to the theme toggle.
 
 ## Commands
 
@@ -33,7 +35,9 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 
 Standard Astro project layout:
 
-- `src/pages/` — file-based routing; each `.astro` file becomes a route (currently only `index.astro`)
+- `src/pages/index.astro` — the whole site: content data (projects, background) in frontmatter, markup rendered statically, plus a pre-paint inline theme script and the toggle handler
+- `src/styles/global.css` — all styling; theme is light/dark via CSS custom properties keyed off `data-theme` on `<html>` (persisted to `localStorage`, defaults to `prefers-color-scheme`)
+- `src/assets/` — project screenshots, optimized at build time via `astro:assets` `<Image>`
 - `public/` — static assets served as-is at the site root
 - TypeScript uses Astro's `strict` preset (`tsconfig.json` extends `astro/tsconfigs/strict`)
 
