@@ -100,8 +100,8 @@ const background = [
       <h1 class="hi">Hi, I'm Diego.</h1>
 
       <p class="bio">
-        I'm a software engineer from Lima with four years building web applications in React and
-        .NET — currently at <a class="link-accent" href="https://www.wtwco.com/" target="_blank" rel="noreferrer">WTW</a>,
+        I'm a software engineer from Lima with five years building web applications in React and
+        .NET - currently at <a class="link-accent" href="https://www.wtwco.com/" target="_blank" rel="noreferrer">WTW</a>,
         previously at <a class="link-accent" href="https://www.ey.com/" target="_blank" rel="noreferrer">EY</a>.
         This September I'm moving to Milan to start a Master's in High Performance Computing
         Engineering at <a class="link-accent" href="https://www.polimi.it/" target="_blank" rel="noreferrer">Politecnico di Milano</a>.
@@ -124,7 +124,12 @@ const background = [
                   {project.host}
                 </a>
                 <p class="p-desc">{project.desc}</p>
-                <div class="screenshot">
+                <a
+                  class="screenshot"
+                  href={`https://${project.host}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <Image
                     src={project.img}
                     alt={`${project.name} screenshot`}
@@ -133,7 +138,7 @@ const background = [
                     loading={i === 0 ? 'eager' : 'lazy'}
                     fetchpriority={i === 0 ? 'high' : undefined}
                   />
-                </div>
+                </a>
               </li>
             ))
           }
@@ -166,6 +171,8 @@ const background = [
           <a href="https://www.linkedin.com/in/diegomzal" target="_blank" rel="noreferrer">linkedin</a>
           <span class="sep">·</span>
           <a href="https://github.com/diegomzal" target="_blank" rel="noreferrer">github</a>
+          <span class="sep">·</span>
+          <a href="/diego-munoz-cv.pdf" target="_blank" rel="noreferrer">cv</a>
         </div>
       </section>
 
