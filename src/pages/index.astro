@@ -5,9 +5,12 @@ import '@fontsource/jetbrains-mono/400-italic.css';
 import '@fontsource/jetbrains-mono/500.css';
 import '@fontsource/jetbrains-mono/600.css';
 import '../styles/global.css';
-import compare from '../assets/compare.png';
-import europa2026 from '../assets/europa2026.png';
-import unitrack from '../assets/unitrack.png';
+import compareLight from '../assets/compare-light.png';
+import compareDark from '../assets/compare-dark.png';
+import europa2026Light from '../assets/europa2026-light.png';
+import europa2026Dark from '../assets/europa2026-dark.png';
+import unitrackLight from '../assets/unitrack-light.png';
+import unitrackDark from '../assets/unitrack-dark.png';
 
 const title = 'Diego Muñoz Zaldivar - Software Engineer';
 const description =
@@ -27,19 +30,19 @@ const projects = [
   {
     name: 'compare',
     host: 'compare.diegomz.com',
-    img: compare,
+    img: { light: compareLight, dark: compareDark },
     desc: 'A minimal text comparer. Paste, diff, move on.',
   },
   {
     name: 'europa2026',
     host: 'europa2026.diegomz.com',
-    img: europa2026,
+    img: { light: europa2026Light, dark: europa2026Dark },
     desc: 'A calendar and itinerary for my trip across Europe this year.',
   },
   {
     name: 'unitrack',
     host: 'unitrack.diegomz.com',
-    img: unitrack,
+    img: { light: unitrackLight, dark: unitrackDark },
     desc: 'Application tracker for students applying to universities abroad.',
   },
 ];
@@ -141,14 +144,17 @@ const background = [
                   rel="noreferrer"
                   tabindex="-1"
                 >
-                  <Image
-                    src={project.img}
-                    alt={`${project.name} screenshot`}
-                    widths={[680, 1360]}
-                    sizes="(max-width: 680px) 100vw, 680px"
-                    loading={i === 0 ? 'eager' : 'lazy'}
-                    fetchpriority={i === 0 ? 'high' : undefined}
-                  />
+                  {(['light', 'dark'] as const).map((theme) => (
+                    <Image
+                      class={`shot-${theme}`}
+                      src={project.img[theme]}
+                      alt={`${project.name} screenshot`}
+                      widths={[680, 1360]}
+                      sizes="(max-width: 680px) 100vw, 680px"
+                      loading={i === 0 ? 'eager' : 'lazy'}
+                      fetchpriority={i === 0 ? 'high' : undefined}
+                    />
+                  ))}
                 </a>
               </li>
             ))

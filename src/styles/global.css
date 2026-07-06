@@ -170,6 +170,11 @@ section {
   object-position: top center;
   display: block;
 }
+/* Each screenshot ships a light and a dark capture; show the one matching
+   the theme. Hidden lazy images aren't fetched, so only one set downloads. */
+.screenshot .shot-dark { display: none; }
+:root[data-theme='dark'] .screenshot .shot-light { display: none; }
+:root[data-theme='dark'] .screenshot .shot-dark { display: block; }
 
 /* cv list */
 .cv { list-style: none; padding: 0; margin: 0; }
