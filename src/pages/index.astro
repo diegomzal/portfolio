@@ -150,15 +150,15 @@ const background = [
                   {project.host}
                 </a>
                 {project.desc && <p class="p-desc">{project.desc}</p>}
-                {project.img && (
-                  <a
-                    class="screenshot"
-                    href={`https://${project.host}`}
-                    target="_blank"
-                    rel="noreferrer"
-                    tabindex="-1"
-                  >
-                    {(['light', 'dark'] as const).map((theme) => (
+                <a
+                  class:list={['screenshot', !project.img && 'is-pending']}
+                  href={`https://${project.host}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  tabindex="-1"
+                >
+                  {project.img ? (
+                    (['light', 'dark'] as const).map((theme) => (
                       <Image
                         class={`shot-${theme}`}
                         src={project.img![theme]}
@@ -168,9 +168,11 @@ const background = [
                         loading={i === 0 ? 'eager' : 'lazy'}
                         fetchpriority={i === 0 ? 'high' : undefined}
                       />
-                    ))}
-                  </a>
-                )}
+                    ))
+                  ) : (
+                    <span class="shot-tbd">Screenshot TBD</span>
+                  )}
+                </a>
               </li>
             ))
           }
