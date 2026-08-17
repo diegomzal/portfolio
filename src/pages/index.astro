@@ -12,21 +12,29 @@ import europa2026Dark from '../assets/europa2026-dark.png';
 import unitrackLight from '../assets/unitrack-light.png';
 import unitrackDark from '../assets/unitrack-dark.png';
 
-const title = 'Diego Muñoz Zaldivar - Software Engineer';
+const title = 'Diego Muñoz Zaldivar - Senior Software Engineer';
 const description =
-  'Diego Muñoz Zaldivar — software engineer from Lima building web applications in React and .NET.';
+  'Diego Muñoz Zaldivar — senior software engineer from Lima building web applications in React and .NET.';
 
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Diego Muñoz Zaldivar',
-  jobTitle: 'Software Engineer',
+  jobTitle: 'Senior Software Engineer',
   url: Astro.site,
   email: 'diegomunozzal@gmail.com',
   sameAs: ['https://www.linkedin.com/in/diegomzal', 'https://github.com/diegomzal'],
 };
 
-const projects = [
+type Project = {
+  name: string;
+  host: string;
+  desc: string;
+  /** Light and dark captures. Omit until screenshots exist; the card renders without one. */
+  img?: { light: ImageMetadata; dark: ImageMetadata };
+};
+
+const projects: Project[] = [
   {
     name: 'compare',
     host: 'compare.diegomz.com',
@@ -45,6 +53,11 @@ const projects = [
     img: { light: unitrackLight, dark: unitrackDark },
     desc: 'Application tracker for students applying to universities abroad.',
   },
+  {
+    name: 'kleos',
+    host: 'yourkleos.com',
+    desc: 'A fun little project to rank your CV among other people, and participate in a global leaderboard.',
+  },
 ];
 
 const background = [
@@ -56,7 +69,7 @@ const background = [
   },
   {
     year: '2024 —',
-    title: 'Software Engineer',
+    title: 'Senior Software Engineer',
     role: 'WTW (Extend Health)',
   },
   {
@@ -113,7 +126,7 @@ const background = [
       <h1 class="hi">Hi, I'm Diego.</h1>
 
       <p class="bio">
-        I'm a software engineer from Lima with five years building web applications in React and
+        I'm a senior software engineer from Lima with five years building web applications in React and
         .NET - currently at <a class="link-accent" href="https://www.wtwco.com/" target="_blank" rel="noreferrer">WTW</a>,
         previously at <a class="link-accent" href="https://www.ey.com/" target="_blank" rel="noreferrer">EY</a>.
         This September I'm moving to Milan to start a Master's in High Performance Computing
@@ -136,25 +149,29 @@ const background = [
                 <a class="p-url" href={`https://${project.host}`} target="_blank" rel="noreferrer">
                   {project.host}
                 </a>
-                <p class="p-desc">{project.desc}</p>
+                {project.desc && <p class="p-desc">{project.desc}</p>}
                 <a
-                  class="screenshot"
+                  class:list={['screenshot', !project.img && 'is-pending']}
                   href={`https://${project.host}`}
                   target="_blank"
                   rel="noreferrer"
                   tabindex="-1"
                 >
-                  {(['light', 'dark'] as const).map((theme) => (
-                    <Image
-                      class={`shot-${theme}`}
-                      src={project.img[theme]}
-                      alt={`${project.name} screenshot`}
-                      widths={[680, 1360]}
-                      sizes="(max-width: 680px) 100vw, 680px"
-                      loading={i === 0 ? 'eager' : 'lazy'}
-                      fetchpriority={i === 0 ? 'high' : undefined}
-                    />
-                  ))}
+                  {project.img ? (
+                    (['light', 'dark'] as const).map((theme) => (
+                      <Image
+                        class={`shot-${theme}`}
+                        src={project.img![theme]}
+                        alt={`${project.name} screenshot`}
+                        widths={[680, 1360]}
+                        sizes="(max-width: 680px) 100vw, 680px"
+                        loading={i === 0 ? 'eager' : 'lazy'}
+                        fetchpriority={i === 0 ? 'high' : undefined}
+                      />
+                    ))
+                  ) : (
+                    <span class="shot-tbd">Screenshot TBD</span>
+                  )}
                 </a>
               </li>
             ))
