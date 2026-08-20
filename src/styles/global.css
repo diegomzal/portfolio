@@ -161,6 +161,7 @@ section {
   );
   border: 1px solid var(--rule);
   overflow: hidden;
+  text-decoration: none;
 }
 .screenshot:hover { border-color: var(--accent); }
 .screenshot img {
@@ -170,6 +171,25 @@ section {
   object-position: top center;
   display: block;
 }
+/* Each screenshot ships a light and a dark capture; show the one matching
+   the theme. Hidden lazy images aren't fetched, so only one set downloads. */
+.screenshot .shot-dark { display: none; }
+:root[data-theme='dark'] .screenshot .shot-light { display: none; }
+:root[data-theme='dark'] .screenshot .shot-dark { display: block; }
+
+/* Projects with no capture yet keep the framed placeholder and say so. The
+   label sits on a solid chip so it stays readable over the stripes. */
+.screenshot.is-pending { display: grid; place-items: center; }
+.screenshot .shot-tbd {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  padding: 7px 14px;
+}
+.screenshot.is-pending:hover .shot-tbd { color: var(--accent); border-color: var(--accent); }
 
 /* cv list */
 .cv { list-style: none; padding: 0; margin: 0; }
