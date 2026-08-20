@@ -1,10 +1,14 @@
-// Pins the Cloudflare Workers deployment to plain static-asset serving.
-// Without this file, Cloudflare's build auto-detects Astro and injects the
-// @astrojs/cloudflare adapter, whose runtime /_image endpoint 404s here.
 {
-  "name": "portfolio",
-  "compatibility_date": "2026-07-01",
-  "assets": {
-    "directory": "./dist"
-  }
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"compatibility_date": "2026-07-05",
+	"compatibility_flags": ["global_fetch_strictly_public"],
+	"name": "portfolio",
+	"main": "@astrojs/cloudflare/entrypoints/server",
+	"assets": {
+		"directory": "./dist",
+		"binding": "ASSETS"
+	},
+	"observability": {
+		"enabled": true
+	}
 }
