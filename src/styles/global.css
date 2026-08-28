@@ -147,6 +147,26 @@ section {
 }
 .project .p-url:hover { color: var(--accent); }
 
+/* stack tags: same 22px hang as the description, chips sized to sit quietly
+   under it rather than compete with the project name */
+.project .p-tech {
+  grid-column: 1 / -1;
+  list-style: none;
+  margin: -2px 0 0;
+  padding-left: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.project .p-tech li {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--rule);
+  padding: 2px 8px;
+}
+
 .screenshot {
   display: block;
   grid-column: 1 / -1;

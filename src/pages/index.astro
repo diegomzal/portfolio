@@ -31,6 +31,8 @@ type Project = {
   name: string;
   host: string;
   desc: string;
+  /** Stack the project actually ships, verified against its source. */
+  tech: string[];
   /** Light and dark captures. Omit until screenshots exist; the card renders without one. */
   img?: { light: ImageMetadata; dark: ImageMetadata };
 };
@@ -41,24 +43,28 @@ const projects: Project[] = [
     host: 'compare.diegomz.com',
     img: { light: compareLight, dark: compareDark },
     desc: 'A minimal text comparer. Paste, diff, move on.',
+    tech: ['React', 'TypeScript', 'Vite', 'Tailwind', 'Firebase Hosting'],
   },
   {
     name: 'europa2026',
     host: 'europa2026.diegomz.com',
     img: { light: europa2026Light, dark: europa2026Dark },
     desc: 'A calendar and itinerary for my trip across Europe this year.',
+    tech: ['React', 'TypeScript', 'Vite', 'Tailwind', 'PWA', 'Firebase Hosting'],
   },
   {
     name: 'unitrack',
     host: 'unitrack.diegomz.com',
     img: { light: unitrackLight, dark: unitrackDark },
     desc: 'Application tracker for students applying to universities abroad.',
+    tech: ['React', 'TypeScript', 'Express', 'Firestore', 'Cloud Run'],
   },
   {
     name: 'kleos',
     host: 'yourkleos.com',
     img: { light: yourKleos, dark: yourKleos },
     desc: 'A fun little project to rank your CV among other people, and participate in a global leaderboard.',
+    tech: ['Next.js', 'FastAPI', 'PostgreSQL', 'Gemini', 'Cloud Run', 'Terraform'],
   },
 ];
 
@@ -70,7 +76,7 @@ const background = [
     note: '(starting Sep)',
   },
   {
-    year: '2024 —',
+    year: '2024 – 26',
     title: 'Senior Software Engineer',
     role: 'WTW (Extend Health)',
   },
@@ -129,7 +135,7 @@ const background = [
 
       <p class="bio">
         I'm a senior software engineer from Lima with five years building web applications in React and
-        .NET - currently at <a class="link-accent" href="https://www.wtwco.com/" target="_blank" rel="noreferrer">WTW</a>,
+        .NET - most recently at <a class="link-accent" href="https://www.wtwco.com/" target="_blank" rel="noreferrer">WTW</a>,
         previously at <a class="link-accent" href="https://www.ey.com/" target="_blank" rel="noreferrer">EY</a>.
         This September I'm moving to Milan to start a Master's in High Performance Computing
         Engineering at <a class="link-accent" href="https://www.polimi.it/" target="_blank" rel="noreferrer">Politecnico di Milano</a>.
@@ -152,6 +158,11 @@ const background = [
                   {project.host}
                 </a>
                 {project.desc && <p class="p-desc">{project.desc}</p>}
+                <ul class="p-tech" aria-label={`${project.name} stack`}>
+                  {project.tech.map((tech) => (
+                    <li>{tech}</li>
+                  ))}
+                </ul>
                 <a
                   class:list={['screenshot', !project.img && 'is-pending']}
                   href={`https://${project.host}`}
